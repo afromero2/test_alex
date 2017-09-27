@@ -1,61 +1,28 @@
 <?php
- 
-require("config.php");
 
-global $CFG;
+/*
+$fecha = date("Y-m-d H:i:s","1505840962");
+echo $fecha."<br>";
+$nuevafecha = strtotime ('-5 hour',"1505840962");
+echo $fecha = date("Y-m-d H:i:s",$nuevafecha);
+*/
 
-echo "TEST NIVEL7<br>";
 
-$path_info = explode("=", $_SERVER['QUERY_STRING']);
-$url = $path_info[1];
-echo $url."<br><br>";
 
-echo "TEST DE PATH_INFO<br>";
-
-echo "Valor:".$_SERVER['PATH_INFO'];
-
+$configdata = "Tzo4OiJzdGRDbGFzcyI6MTU6e3M6NzoibmV0d29yayI7czoxMToidXRwbC5lZHUuZWMiO3M6NToidGl0bGUiO3M6MTg6IlJlZCBkZSBBbGV4IFJvbWVybyI7czo4OiJmZWVkdHlwZSI7czo1OiJncm91cCI7czo2OiJmZWVkaWQiO2k6MTI4NTY2NDc7czoxNDoiZGVmYXVsdGdyb3VwaWQiO3M6MDoiIjtzOjE4OiJkZWZhdWx0dG9jYW5vbmljYWwiO2k6MTtzOjY6InVzZXNzbyI7aTowO3M6MTM6InNob3dvZ3ByZXZpZXciO2k6MDtzOjU6ImZldGNoIjtpOjA7czo3OiJwcml2YXRlIjtpOjA7czoyMDoiaWdub3JlX2Nhbm9uaWNhbF91cmwiO2k6MDtzOjEwOiJwcm9tcHR0ZXh0IjtzOjA6IiI7czoxMDoic2hvd2hlYWRlciI7aToxO3M6MTU6ImhpZGVOZXR3b3JrTmFtZSI7aTowO3M6MTA6InNob3dmb290ZXIiO2k6MTt9";
+$config_object = unserialize(base64_decode($configdata));
 echo "<pre>";
-print_r(var_export($_SERVER));
-echo "</pre>";
+print_r($config_object);
 
 return;
 
 
+$config_object->title = "Luis Rios";
+$config_object->feedid = 30004000;
 
-$fp = fsockopen("172.16.50.19", 27017, $errno, $errstr, 30); 
-if($fp){
- print_object("Si hay conexion");
- print_object($fp);
-}else{
-   print_object("No hay conexion");
-   echo "$errstr ($errno)"; 
-}
-
-fclose($fp); 
-
-/*
-function GetPing($ip=NULL) {
- if(empty($ip)) {$ip = $_SERVER['REMOTE_ADDR'];}
- if(getenv("OS")=="Windows_NT") {
-  $exec = exec("ping -n 3 -l 64 ".$ip);
-  return end(explode(" ", $exec ));
- }
- else {
-  $exec = exec("ping -c 3 -s 64 -t 64 ".$ip);
-  $array = explode("/", end(explode("=", $exec )) );
-  return ceil($array[1]) . 'ms';
- }
-}
- 
-$ip = '172.16.50.19';
- 
-if (GetPing($ip) == 'perdidos),') {
-    echo 'Tiempo agotado';
-} else if (GetPing($ip) == '0ms') {
-    echo 'servidor apagado';
-} else {
-    echo 'servidor con conectividad';
-}
-*/
+$configdata = base64_encode(serialize($config_object));
+echo "<pre>";
+print_r($configdata);
+echo "</pre>";
 
 ?>
